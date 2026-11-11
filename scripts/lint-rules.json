@@ -1,0 +1,63 @@
+{
+  "rules": [
+    {
+      "id": "json-body-read",
+      "level": "WARN",
+      "pattern": "\\b(?:req|request)\\s*\\.\\s*json\\s*\\(",
+      "message": "Request JSON read detected. Check that signature verification receives untouched raw bytes; this linter cannot trace execution order.",
+      "frameworks": [
+        "app",
+        "fastapi"
+      ]
+    },
+    {
+      "id": "signature-not-seen",
+      "level": "WARN",
+      "missing": true,
+      "pattern": "\\.\\s*(?:constructEvent|construct_event|constructEventAsync|parseEventNotification|parse_event_notification)\\s*\\(",
+      "message": "No recognized Stripe signature-verification call in this file. Verification may be delegated; inspect the call path."
+    },
+    {
+      "id": "raw-read",
+      "level": "FOUND",
+      "pattern": "\\.\\s*(?:text|arrayBuffer|body)\\s*\\(",
+      "message": "Raw-body read syntax appears in this file; payload flow is unverified."
+    },
+    {
+      "id": "event-id-reference",
+      "level": "FOUND",
+      "pattern": "\\bevent\\s*\\.\\s*id\\b|\\bprocessedWebhookEvent\\b",
+      "message": "Event-ID syntax appears; persistence and deduplication are unverified."
+    },
+    {
+      "id": "transaction-reference",
+      "level": "FOUND",
+      "pattern": "\\$transaction\\s*\\(|\\bBEGIN\\b|\\btransaction\\s*\\(",
+      "channel": "clean",
+      "message": "Transaction-related text appears; database semantics are unverified."
+    },
+    {
+      "id": "unique-error-review",
+      "level": "WARN",
+      "pattern": "\\bP2002\\b",
+      "channel": "clean",
+      "message": "Review this unique-error handler at its throwing operation. A column name such as id, or meta.target alone, does not identify the event table."
+    },
+    {
+      "id": "live-fetch",
+      "level": "FOUND",
+      "pattern": "\\bstripe\\s*\\.\\s*(?:subscriptions|checkout\\s*\\.\\s*sessions)\\s*\\.\\s*retrieve\\s*\\(",
+      "message": "Stripe retrieval call syntax appears; this does not establish write ordering."
+    },
+    {
+      "id": "pages-body-parser",
+      "level": "WARN",
+      "missing": true,
+      "pattern": "\\bbodyParser\\s*:\\s*false\\b",
+      "frameworks": [
+        "pages"
+      ],
+      "message": "No bodyParser:false syntax in this Pages API file; check raw-body middleware/configuration."
+    }
+  ]
+}

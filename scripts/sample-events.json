@@ -1,0 +1,81 @@
+{
+  "checkout.session.completed": {
+    "id": "cs_local",
+    "object": "checkout.session",
+    "mode": "subscription",
+    "status": "complete",
+    "payment_status": "paid",
+    "customer": "cus_local",
+    "subscription": "sub_local"
+  },
+  "checkout.session.async_payment_succeeded": {
+    "id": "cs_local",
+    "object": "checkout.session",
+    "mode": "subscription",
+    "status": "complete",
+    "payment_status": "paid",
+    "customer": "cus_local",
+    "subscription": "sub_local"
+  },
+  "checkout.session.async_payment_failed": {
+    "id": "cs_local",
+    "object": "checkout.session",
+    "mode": "subscription",
+    "status": "complete",
+    "payment_status": "unpaid",
+    "customer": "cus_local",
+    "subscription": "sub_local"
+  },
+  "customer.subscription.updated": {
+    "id": "sub_local",
+    "object": "subscription",
+    "customer": "cus_local",
+    "status": "active",
+    "items": {
+      "data": [
+        {
+          "price": {
+            "id": "price_local"
+          }
+        }
+      ]
+    }
+  },
+  "customer.subscription.deleted": {
+    "id": "sub_local",
+    "object": "subscription",
+    "customer": "cus_local",
+    "status": "canceled",
+    "items": {
+      "data": [
+        {
+          "price": {
+            "id": "price_local"
+          }
+        }
+      ]
+    }
+  },
+  "invoice.payment_failed": {
+    "id": "in_local",
+    "object": "invoice",
+    "customer": "cus_local",
+    "parent": {
+      "type": "subscription_details",
+      "subscription_details": {
+        "subscription": "sub_local"
+      }
+    }
+  },
+  "invoice.paid": {
+    "id": "in_local",
+    "object": "invoice",
+    "customer": "cus_local",
+    "parent": {
+      "type": "subscription_details",
+      "subscription_details": {
+        "subscription": "sub_local"
+      }
+    }
+  }
+}
